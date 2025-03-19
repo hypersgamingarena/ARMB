@@ -10,7 +10,7 @@ namespace ARMB.API.Data
 
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             // Replace with your actual connection string
-            optionsBuilder.UseSqlServer("Server=localhost;Database=ARMB00.0001;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ARMB00.0001;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
             return new AppDbContext(optionsBuilder.Options);
         }
     }

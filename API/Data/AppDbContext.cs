@@ -7,19 +7,27 @@ namespace ARMB.API.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
+        public AppDbContext(DbContextOptions<AppDbContext> options)
+            : base(options)
+        {
+        }
 
-        // Rename DbSet to avoid conflict with Identity's Users property
-        public DbSet<User> AppUsers { get; set; }
-        //public DbSet<Reminder> Reminders { get; set; }
-        //  public DbSet<BiographyEntry> Biographies { get; set; }
+        // Parameterless constructor (if needed for design-time)
+        public AppDbContext() { }
 
-        // Fallback configuration for design-time
+        // Rename to avoid conflict with Identity's built-in Users property
+        public DbSet<Domain.Entities.User> AppUsers { get; set; }
+        public DbSet<Reminder> Reminders { get; set; }
+        
+        public DbSet<BiographyEntry> Biographies { get; set; }
+
+        // Optional: Fallback configuration for design-time migrations
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=YOUR_SERVER;Database=ARMB_DB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
+                // Replace with your actual connection string
+                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ARMB_DB;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True");
             }
         }
     }

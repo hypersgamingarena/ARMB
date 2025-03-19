@@ -12,7 +12,7 @@ namespace ARMB.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthController(UserManager<ApplicationUser> userManager, 
+        public AuthController(UserManager<ApplicationUser> userManager,
                               SignInManager<ApplicationUser> signInManager)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
@@ -68,11 +68,11 @@ namespace ARMB.Web.Controllers
 
             try
             {
-                var user = new ApplicationUser 
-                { 
-                    UserName = model.Email, 
-                    Email = model.Email, 
-                    FullName = model.FullName 
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FullName = model.FullName
                 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
@@ -105,10 +105,9 @@ namespace ARMB.Web.Controllers
             }
             catch (Exception ex)
             {
-                // Log error if necessary
+                // Optionally log the error
             }
             return RedirectToAction("Login", "Auth");
         }
     }
 }
-    
